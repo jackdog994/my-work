@@ -1,4 +1,8 @@
+#Preparing game state
+global game_state
+game_state = "TRUE"
 
+#Defining the game as a function to allow multiple playthroughs
 def naughts_and_crosses():
 
     #Game board
@@ -11,24 +15,22 @@ def naughts_and_crosses():
 
     #Win statement
     def win_statement():
-        if player1go == "FALSE":
-            winning_player = player1
-        else:
-            winning_player = player2
-        print(f"Congratulations {winning_player}, you have won!")
+        print(f"Congratulations {player_id}, you have won!")
         new_game()
 
     #New game
     def new_game():
-        new_game_input = str(input("Do you want to play again?"))
-        if new_game_input.lower() == "yes":
-            naughts_and_crosses()
-        else:
-            print("OK. Thanks for playing!")
-            global player1go
-            global player2go
-            player1go = "FALSE"
-            player2go = "FALSE"
+        global game_state
+        while game_state is "TRUE":
+            new_game_input = str(input("Do you want to play again?"))
+            if new_game_input.lower() == "yes":
+                naughts_and_crosses()
+            elif new_game_input.lower() == "no":
+                print("OK. Thanks for playing!")
+                game_state = "FALSE"
+            else:
+                invalid_input()
+                continue
 
     #Invalid input
     def invalid_input():
@@ -94,12 +96,6 @@ def naughts_and_crosses():
     print("------------")
     print(f" 1 | 2 | 3 ")
 
-    #Preparing game state
-    game_state = "TRUE"
-    global player1go
-    global player2go
-    player1go = "TRUE"
-
     #Selecting character
     while game_state is "TRUE":
         player1 = str(input("Player 1: Do you want to be X or O?")).upper()
@@ -113,154 +109,90 @@ def naughts_and_crosses():
             player1 = "O"
             player2 = "X"
 
+        currentplayer = player1
+        player_id = "Player 1"
 
         game_board()
         break
 
     #Game logic
     while game_state is "TRUE":
-        while player1go is "TRUE":
-            player1_moveinput = str(input(f"Player 1 - {player1} - what is your move?"))
-            if player1_moveinput == "1":
-                if pos_1 != " ":
-                    invalid_input()
-                    continue
-                pos_1 = player1
-                move_d["position_1"] = player1
-            elif player1_moveinput == "2":
-                if pos_2 != " ":
-                    invalid_input()
-                    continue
-                pos_2 = player1
-                move_d["position_2"] = player1
-            elif player1_moveinput == "3":
-                if pos_3 != " ":
-                    invalid_input()
-                    continue
-                pos_3 = player1
-                move_d["position_3"] = player1
-            elif player1_moveinput == "4":
-                if pos_4 != " ":
-                    invalid_input()
-                    continue
-                pos_4 = player1
-                move_d["position_4"] = player1
-            elif player1_moveinput == "5":
-                if pos_5 != " ":
-                    invalid_input()
-                    continue
-                pos_5 = player1
-                move_d["position_5"] = player1
-            elif player1_moveinput == "6":
-                if pos_6 != " ":
-                    invalid_input()
-                    continue
-                pos_6 = player1
-                move_d["position_6"] = player1
-            elif player1_moveinput == "7":
-                if pos_7 != " ":
-                    invalid_input()
-                    continue
-                pos_7 = player1
-                move_d["position_7"] = player1
-            elif player1_moveinput == "8":
-                if pos_8 != " ":
-                    invalid_input()
-                    continue
-                pos_8 = player1
-                move_d["position_8"] = player1
-            elif player1_moveinput == "9":
-                if pos_9 != " ":
-                    invalid_input()
-                    continue
-                pos_9 = player1
-                move_d["position_9"] = player1
-            else:
+        player_moveinput = str(input(f"{player_id} - {currentplayer} - what is your move?"))
+        if player_moveinput == "1":
+            if pos_1 != " ":
                 invalid_input()
                 continue
-
-            #Swapping turns
-            player1go = "FALSE"
-            player2go = "TRUE"
-
-            #Game board
-            game_board()
-
-            #Win checking
-            win_checking()
-
-            break
-
-        while player2go is "TRUE":
-            player2_moveinput = str(input(f"Player 2 - {player2} - what is your move?"))
-            if player2_moveinput == "1":
-                if pos_1 != " ":
-                    invalid_input()
-                    continue
-                pos_1 = player2
-                move_d["position_1"] = player2
-            elif player2_moveinput == "2":
-                if pos_2 != " ":
-                    invalid_input()
-                    continue
-                pos_2 = player2
-                move_d["position_2"] = player2
-            elif player2_moveinput == "3":
-                if pos_3 != " ":
-                    invalid_input()
-                    continue
-                pos_3 = player2
-                move_d["position_3"] = player2
-            elif player2_moveinput == "4":
-                if pos_4 != " ":
-                    invalid_input()
-                    continue
-                pos_4 = player2
-                move_d["position_4"] = player2
-            elif player2_moveinput == "5":
-                if pos_5 != " ":
-                    invalid_input()
-                    continue
-                pos_5 = player2
-                move_d["position_5"] = player2
-            elif player2_moveinput == "6":
-                if pos_6 != " ":
-                    invalid_input()
-                    continue
-                pos_6 = player2
-                move_d["position_6"] = player2
-            elif player2_moveinput == "7":
-                if pos_7 != " ":
-                    invalid_input()
-                    continue
-                pos_7 = player2
-                move_d["position_7"] = player2
-            elif player2_moveinput == "8":
-                if pos_8 != " ":
-                    invalid_input()
-                    continue
-                pos_8 = player2
-                move_d["position_8"] = player2
-            elif player2_moveinput == "9":
-                if pos_9 != " ":
-                    invalid_input()
-                    continue
-                pos_9 = player2
-                move_d["position_9"] = player2
-            else:
+            pos_1 = currentplayer
+            move_d["position_1"] = currentplayer
+        elif player_moveinput == "2":
+            if pos_2 != " ":
                 invalid_input()
                 continue
+            pos_2 = currentplayer
+            move_d["position_2"] = currentplayer
+        elif player_moveinput == "3":
+            if pos_3 != " ":
+                invalid_input()
+                continue
+            pos_3 = currentplayer
+            move_d["position_3"] = currentplayer
+        elif player_moveinput == "4":
+            if pos_4 != " ":
+                invalid_input()
+                continue
+            pos_4 = currentplayer
+            move_d["position_4"] = currentplayer
+        elif player_moveinput == "5":
+            if pos_5 != " ":
+                invalid_input()
+                continue
+            pos_5 = currentplayer
+            move_d["position_5"] = currentplayer
+        elif player_moveinput == "6":
+            if pos_6 != " ":
+                invalid_input()
+                continue
+            pos_6 = currentplayer
+            move_d["position_6"] = currentplayer
+        elif player_moveinput == "7":
+            if pos_7 != " ":
+                invalid_input()
+                continue
+            pos_7 = currentplayer
+            move_d["position_7"] = currentplayer
+        elif player_moveinput == "8":
+            if pos_8 != " ":
+                invalid_input()
+                continue
+            pos_8 = currentplayer
+            move_d["position_8"] = currentplayer
+        elif player_moveinput == "9":
+            if pos_9 != " ":
+                invalid_input()
+                continue
+            pos_9 = currentplayer
+            move_d["position_9"] = currentplayer
+        else:
+            invalid_input()
+            continue
 
-            #Swapping turns
-            player2go = "FALSE"
-            player1go = "TRUE"
+        #Game board
+        game_board()
 
-            #Game board
-            game_board()
+        #Win checking
+        win_checking()
 
-            #Win checking
-            win_checking()
+        #Swapping turns
+        if currentplayer == player1:
+            currentplayer = player2
+        else:
+            currentplayer = player1
 
-            break
+        if player_id == "Player 1":
+            player_id = "Player 2"
+        else:
+            player_id = "Player 1"
+
+        continue
 
 naughts_and_crosses()
