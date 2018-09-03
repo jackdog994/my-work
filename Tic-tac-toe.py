@@ -1,6 +1,6 @@
 #Preparing game state
 global game_state
-game_state = "TRUE"
+game_state = True
 
 #Defining the game as a function to allow multiple playthroughs
 def naughts_and_crosses():
@@ -21,7 +21,7 @@ def naughts_and_crosses():
     #New game
     def new_game():
         global game_state
-        while game_state is "TRUE":
+        while game_state is True:
             new_game_input = str(input("Do you want to play again?"))
             if new_game_input.lower() == "yes":
                 naughts_and_crosses()
@@ -97,7 +97,7 @@ def naughts_and_crosses():
     print(f" 1 | 2 | 3 ")
 
     #Selecting character
-    while game_state is "TRUE":
+    while game_state is True:
         player1 = str(input("Player 1: Do you want to be X or O?")).upper()
         if player1 not in set(comparison_d.values()):
             invalid_input()
@@ -116,7 +116,7 @@ def naughts_and_crosses():
         break
 
     #Game logic
-    while game_state is "TRUE":
+    while game_state is True:
         player_moveinput = str(input(f"{player_id} - {currentplayer} - what is your move?"))
         if player_moveinput == "1":
             if pos_1 != " ":
