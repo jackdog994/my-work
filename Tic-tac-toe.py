@@ -18,7 +18,7 @@ def naughts_and_crosses():
         print(f"Congratulations {winning_player}, you have won!")
         new_game()
 
-        #New game
+    #New game
     def new_game():
         new_game_input = str(input("Do you want to play again?"))
         if new_game_input.lower() == "yes":
