@@ -18,7 +18,7 @@ def naughts_and_crosses():
         print(f"Congratulations {winning_player}, you have won!")
         new_game()
 
-#New game
+        #New game
     def new_game():
         new_game_input = str(input("Do you want to play again?"))
         if new_game_input.lower() == "yes":
@@ -35,7 +35,6 @@ def naughts_and_crosses():
         print("That's not a valid input, try again!")
 
     #Win checking
-
     def win_checking():
         if move_d["position_7"]==move_d["position_8"]==move_d["position_9"]:
             win_statement()
@@ -83,7 +82,6 @@ def naughts_and_crosses():
     pos_9=" "
 
     #Position dictionary
-
     pos_d = {"1":pos_1,"2":pos_2,"3":pos_3,"4":pos_4,"5":pos_5,"6":pos_6,"7":pos_7,"8":pos_8,"9":pos_9}
     move_d = {"position_1":"1","position_2":"2","position_3":"3","position_4":"4","position_5":"5","position_6":"6","position_7":"7","position_8":"8","position_9":"9"}
     comparison_d = {"k1":"X","k2":"O"}
@@ -102,6 +100,7 @@ def naughts_and_crosses():
     global player2go
     player1go = "TRUE"
 
+    #Selecting character
     while game_state is "TRUE":
         player1 = str(input("Player 1: Do you want to be X or O?")).upper()
         if player1 not in set(comparison_d.values()):
@@ -180,6 +179,7 @@ def naughts_and_crosses():
                 invalid_input()
                 continue
 
+            #Swapping turns
             player1go = "FALSE"
             player2go = "TRUE"
 
@@ -251,6 +251,7 @@ def naughts_and_crosses():
                 invalid_input()
                 continue
 
+            #Swapping turns
             player2go = "FALSE"
             player1go = "TRUE"
 
