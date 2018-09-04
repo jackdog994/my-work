@@ -38,34 +38,16 @@ def naughts_and_crosses():
 
     #Win checking
     def win_checking():
-        if move_d["position_7"]==move_d["position_8"]==move_d["position_9"]:
-            win_statement()
-
-        elif move_d["position_4"]==move_d["position_5"]==move_d["position_6"]:
-            win_statement()
-
-        elif move_d["position_1"]==move_d["position_2"]==move_d["position_3"]:
-            win_statement()
-
-        elif move_d["position_7"]==move_d["position_4"]==move_d["position_1"]:
-            win_statement()
-
-        elif move_d["position_8"]==move_d["position_5"]==move_d["position_2"]:
-            win_statement()
-
-        elif move_d["position_9"]==move_d["position_6"]==move_d["position_3"]:
-            win_statement()
-
-        elif move_d["position_7"]==move_d["position_5"]==move_d["position_3"]:
-            win_statement()
-
-        elif move_d["position_9"]==move_d["position_5"]==move_d["position_1"]:
-            win_statement()
-
-        elif move_d["position_4"]==move_d["position_5"]==move_d["position_6"]:
-            win_statement()
-
-        elif move_d["position_8"]==move_d["position_5"]==move_d["position_2"]:
+        if move_d["position_7"]==move_d["position_8"]==move_d["position_9"] or \
+        move_d["position_4"]==move_d["position_5"]==move_d["position_6"] or \
+        move_d["position_1"]==move_d["position_2"]==move_d["position_3"] or \
+        move_d["position_7"]==move_d["position_4"]==move_d["position_1"] or \
+        move_d["position_8"]==move_d["position_5"]==move_d["position_2"] or \
+        move_d["position_9"]==move_d["position_6"]==move_d["position_3"] or \
+        move_d["position_7"]==move_d["position_5"]==move_d["position_3"] or \
+        move_d["position_9"]==move_d["position_5"]==move_d["position_1"] or \
+        move_d["position_4"]==move_d["position_5"]==move_d["position_6"] or \
+        move_d["position_8"]==move_d["position_5"]==move_d["position_2"]:
             win_statement()
 
         elif set(move_d.values()) == set(comparison_d.values()):
