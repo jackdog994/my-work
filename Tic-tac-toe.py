@@ -27,7 +27,7 @@ def naughts_and_crosses():
                 naughts_and_crosses()
             elif new_game_input.lower() == "no":
                 print("OK. Thanks for playing!")
-                game_state = "FALSE"
+                game_state = False
             else:
                 invalid_input()
                 continue
@@ -66,17 +66,16 @@ def naughts_and_crosses():
     pos_9=" "
 
     #Position dictionary
-    pos_d = {"1":pos_1,"2":pos_2,"3":pos_3,"4":pos_4,"5":pos_5,"6":pos_6,"7":pos_7,"8":pos_8,"9":pos_9}
     move_d = {"position_1":"1","position_2":"2","position_3":"3","position_4":"4","position_5":"5","position_6":"6","position_7":"7","position_8":"8","position_9":"9"}
     comparison_d = {"k1":"X","k2":"O"}
 
     #Introduction
     print("Welcome to naughts and crosses! \nWhen asked for your move, type in the number corresponding to the position on the board below.")
-    print(f" 7 | 8 | 9 ")
+    print(" 7 | 8 | 9 ")
     print("------------")
-    print(f" 4 | 5 | 6 ")
+    print(" 4 | 5 | 6 ")
     print("------------")
-    print(f" 1 | 2 | 3 ")
+    print(" 1 | 2 | 3 ")
 
     #Selecting character
     while game_state is True:
