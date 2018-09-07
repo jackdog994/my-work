@@ -1,6 +1,15 @@
+#docstring
+"""
+This module allows you to play a game of naughts and crosses. Player 1 will be
+asked to select whether they want to be X or O. The positions on the board are
+mapped to the layout of the numpad, enter the number for the corresponding position.
+Upon someone winning, or a draw, you can choose whether to play again.
+This was the first extended program I wrote in Python. Have fun!
+"""
+
 #Preparing game state
-global game_state
-game_state = True
+global GAME_STATE
+GAME_STATE = True
 
 #Defining the game as a function to allow multiple playthroughs
 def naughts_and_crosses():
@@ -20,14 +29,14 @@ def naughts_and_crosses():
 
     #New game
     def new_game():
-        global game_state
-        while game_state is True:
+        global GAME_STATE
+        while GAME_STATE is True:
             new_game_input = str(input("Do you want to play again?"))
             if new_game_input.lower() == "yes":
                 naughts_and_crosses()
             elif new_game_input.lower() == "no":
                 print("OK. Thanks for playing!")
-                game_state = False
+                GAME_STATE = False
             else:
                 invalid_input()
                 continue
@@ -38,16 +47,17 @@ def naughts_and_crosses():
 
     #Win checking
     def win_checking():
-        if move_d["position_7"]==move_d["position_8"]==move_d["position_9"] or \
-        move_d["position_4"]==move_d["position_5"]==move_d["position_6"] or \
-        move_d["position_1"]==move_d["position_2"]==move_d["position_3"] or \
-        move_d["position_7"]==move_d["position_4"]==move_d["position_1"] or \
-        move_d["position_8"]==move_d["position_5"]==move_d["position_2"] or \
-        move_d["position_9"]==move_d["position_6"]==move_d["position_3"] or \
-        move_d["position_7"]==move_d["position_5"]==move_d["position_3"] or \
-        move_d["position_9"]==move_d["position_5"]==move_d["position_1"] or \
-        move_d["position_4"]==move_d["position_5"]==move_d["position_6"] or \
-        move_d["position_8"]==move_d["position_5"]==move_d["position_2"]:
+        if \
+        move_d["position_7"] == move_d["position_8"] == move_d["position_9"] or \
+        move_d["position_4"] == move_d["position_5"] == move_d["position_6"] or \
+        move_d["position_1"] == move_d["position_2"] == move_d["position_3"] or \
+        move_d["position_7"] == move_d["position_4"] == move_d["position_1"] or \
+        move_d["position_8"] == move_d["position_5"] == move_d["position_2"] or \
+        move_d["position_9"] == move_d["position_6"] == move_d["position_3"] or \
+        move_d["position_7"] == move_d["position_5"] == move_d["position_3"] or \
+        move_d["position_9"] == move_d["position_5"] == move_d["position_1"] or \
+        move_d["position_4"] == move_d["position_5"] == move_d["position_6"] or \
+        move_d["position_8"] == move_d["position_5"] == move_d["position_2"]:
             win_statement()
 
         elif set(move_d.values()) == set(comparison_d.values()):
@@ -55,19 +65,19 @@ def naughts_and_crosses():
             new_game()
 
     #Declaring the values for the board positions
-    pos_1=" "
-    pos_2=" "
-    pos_3=" "
-    pos_4=" "
-    pos_5=" "
-    pos_6=" "
-    pos_7=" "
-    pos_8=" "
-    pos_9=" "
+    pos_1 = " "
+    pos_2 = " "
+    pos_3 = " "
+    pos_4 = " "
+    pos_5 = " "
+    pos_6 = " "
+    pos_7 = " "
+    pos_8 = " "
+    pos_9 = " "
 
     #Position dictionary
-    move_d = {"position_1":"1","position_2":"2","position_3":"3","position_4":"4","position_5":"5","position_6":"6","position_7":"7","position_8":"8","position_9":"9"}
-    comparison_d = {"k1":"X","k2":"O"}
+    move_d = {"position_1":"1", "position_2":"2", "position_3":"3", "position_4":"4", "position_5":"5", "position_6":"6", "position_7":"7", "position_8":"8", "position_9":"9"}
+    comparison_d = {"k1":"X", "k2":"O"}
 
     #Introduction
     print("Welcome to naughts and crosses! \nWhen asked for your move, type in the number corresponding to the position on the board below.")
@@ -78,7 +88,7 @@ def naughts_and_crosses():
     print(" 1 | 2 | 3 ")
 
     #Selecting character
-    while game_state is True:
+    while GAME_STATE is True:
         player1 = str(input("Player 1: Do you want to be X or O?")).upper()
         if player1 not in set(comparison_d.values()):
             invalid_input()
@@ -97,7 +107,7 @@ def naughts_and_crosses():
         break
 
     #Game logic
-    while game_state is True:
+    while GAME_STATE is True:
         player_moveinput = str(input(f"{player_id} - {currentplayer} - what is your move?"))
         if player_moveinput == "1":
             if pos_1 != " ":
