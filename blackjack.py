@@ -32,7 +32,7 @@ for card in deck:
 
 print(shuffled_deck)
 
-#Class for defining playername
+#Class for defining attributes
 
 class Player:
 
@@ -54,55 +54,67 @@ class Player:
 #Logic to either reset the round or take the player out of the round
 class GameReset:
     ''' Class to either reset the round or take the player out of the round '''
-    def reset_player(self,player_reset):
+    def reset_player(self,player_to_reset):
         '''Remove a player from the round'''
-        self.player_reset = player_reset
-        player_list[player_reset].attributes['bet_size'] = 0
-        player_list[player_reset].attributes['natural'] = False
-        player_list[player_reset].attributes['hand'] = []
-        player_list[player_reset].attributes['hand_value'] = []
-        player_list[player_reset].attributes['in_round'] = False
+        self.player_to_reset = player_to_reset
+        player_list[player_to_reset].attributes['bet_size'] = 0
+        player_list[player_to_reset].attributes['natural'] = False
+        player_list[player_to_reset].attributes['hand'] = []
+        player_list[player_to_reset].attributes['hand_value'] = []
+        player_list[player_to_reset].attributes['in_round'] = False
 
     def reset_game(self):
         '''Reset the round'''
         for player in range(0,(no_players+1)):
             self.reset_player(player)
 
+#Defining logic to deal a single card
+class Deal():
+    '''Class to deal a card'''
+
+    def dealing(self,player):
+            self.player = player
+            dealt_card = shuffled_deck.pop(0)
+            player_list[player].update_hand(dealt_card)
+            try:
+                player_list[player].attributes['hand_value'].append(int(player_list[player].attributes['hand'][-1]))
+            except:
+                if player_list[player].attributes['hand'][-1] == "Ace":
+                    print("Ace Check")
+                    player_list[player].attributes['hand_value'].append("Ace")
+                else:
+                    player_list[player].attributes['hand_value'].append(10)
+
 #Dealing the first round of cards
 class FirstDeal:
     """Dealing the first round of cards"""
-    def __init__(self,shuffled_deck):
-        self.shuffled_deck = shuffled_deck
     def first_dealing(self):
         for i in range(0,2):
             for player in range(0,(no_players+1)):
-                dealt_card = self.shuffled_deck.pop(0)
-                player_list[player].update_hand(dealt_card)
+                Deal().dealing(player)
 
         hand_string = ""
         print("\nThe result after the first deal:\n")
         for player in range(0,(no_players+1)):
             if player_list[player].attributes['name'] == 'Dealer':
-                hand_string += f"Dealer: [{player_list[0].attributes['hand'][0]},'?']\n"
-
+                hand_string += f"Dealer: ['{player_list[0].attributes['hand'][0]}','?']\n"
             else:
                 hand_string += f"{player_list[player].attributes['name']}:{player_list[player].attributes['hand']} "
-
         print(hand_string)
 
 #Creating a list of the numerical value of the cards
-class ValueConverstion:
+'''class ValueConverstion:
     """Converting the value of the cards in the players hand to their numerical value"""
-    def check_value(self):
-        for player in range(0,(no_players+1)):
-            for value in player_list[player].attributes['hand']:
-                try:
-                    player_list[player].attributes['hand_value'].append(int(value))
-                except:
-                    if value == "Ace":
-                        player_list[player].attributes['hand_value'].append("Ace")
-                    else:
-                        player_list[player].attributes['hand_value'].append(10)
+    def check_value(self,player):
+        self.player = player
+        print(f"{player_list[player].attributes['name']}")
+        try:
+            player_list[player].attributes['hand_value'].append(int(value))
+        except:
+            if value == "Ace":
+                player_list[player].attributes['hand_value'].append("Ace")
+            else:
+                player_list[player].attributes['hand_value'].append(10)'''
 
 #Checking for a Natural on the first go
 class NaturalCheck:
@@ -143,7 +155,6 @@ class NaturalCheck:
                 print("2ab")
                 #If only a player has a natural
 
-
             elif player_list[0].attributes['natural'] == True:
                 print("3aa")
                 print("Unlucky! The dealer had a natural 21, all players lose their bets.")
@@ -151,6 +162,8 @@ class NaturalCheck:
                     print("3ab")
                     player_list[notnaturals].attributes['pool'] -= player_list[notnaturals].attributes['bet_size']
                 GameReset().reset_game()
+
+
 
 #Setting up player variables
 
@@ -193,27 +206,60 @@ for player in range(1,(no_players+1)):
     player_no += 1
 
 #Dealing the first round of cards
-FirstDeal(shuffled_deck).first_dealing()
+FirstDeal().first_dealing()
 
 #Converting the cards to their numerical value
-ValueConverstion().check_value()
+'''
+for player in range(0,(no_players+1)):
+    for value in player_list[player].attributes['hand']:
+        ValueConverstion().check_value(player)
+'''
 
 #Checking for a Natural 21 after the first deal
 NaturalCheck().check_natural()
 
+#Logic to define a round of play
 
+for player in range(1,(no_players+1)):
+    while player_list[player].attributes['in_round'] is True:
+        #Checking if Ace is in the playerhand
+        index_pos  = -1
+        for value in player_list[player].attributes['hand']:
+            index_pos += 1
+            if value == "Ace":
+                if sum(i for i in (player_list[player].attributes['hand_value']) if not isinstance(i, str)) + 11 > 21:
+                    player_list[player].attributes['hand_value'][index_pos] = 1
+                else:
+                    player_list[player].attributes['hand_value'][index_pos] = 11
 
-
+        #Checking for bust
+        if sum(player_list[player].attributes["hand_value"]) > 21:
+            print(f"Bust! {player_list[player].attributes['hand']} - You lose your bet")
+            player_list[player].attributes['pool'] -= player_list[player].attributes['bet_size']
+            GameReset().reset_player(player)
+            break
+        print(f"{player_list[player].attributes['hand']}")
+        print(f"{player_list[player].attributes['hand_value']}")
+        stand_or_hit = input(f"{player_list[player].attributes['name']} your current hand is worth {sum(player_list[player].attributes['hand_value'])}. Do you want to stand or hit? ").lower()
+        if stand_or_hit[0] == "s":
+            break
+        elif stand_or_hit[0] == "h":
+            Deal().dealing(player)
+            #ValueConverstion().check_value(player)
+            continue
+        else:
+            print("That's not a valid answer!")
+            continue
 
 #class StandHitOrBust:
-    """Calculating the available moves to each player""
-    for name in player_values:
-        if sum(player_values[name]) > 21:
-            print("Bust! You lose your bet")
-              player_pools[name] -= players_bets[name]
-        elif sum(player_values[name]) < 21:
-            stand_or_hit = input(f"Your current hand is worth {sum(player_values[name])}. Do you want to stand or hit?").lower()
-            if stand_or_hit == "stand":
-                continue
-            elif stand_or_hit == "hit"
-                Deal()"""
+"""Calculating the available moves to each player""
+for name in player_values:
+    if sum(player_values[name]) > 21:
+        print("Bust! You lose your bet")
+          player_pools[name] -= players_bets[name]
+    elif sum(player_values[name]) < 21:
+        stand_or_hit = input(f"Your current hand is worth {sum(player_values[name])}. Do you want to stand or hit?").lower()
+        if stand_or_hit == "stand":
+            continue
+        elif stand_or_hit == "hit"
+            Deal()"""
