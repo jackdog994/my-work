@@ -1,4 +1,5 @@
-"""Quick project to recreate the hacking game from the Fallout series, roughly 2hr work"""
+"""Quick project to recreate the hacking game from the Fallout series, 
+roughly 2hr work. First experiment with calling data from external files and manipulating it."""
 # Importing words in to module
 import random
 GAME_STATE = True
