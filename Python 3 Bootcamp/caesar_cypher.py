@@ -1,5 +1,5 @@
 #Ceaser Cypher
-'''Quick project to encrypt and decrypt a message using a Caesar cypher.'''
+'''Quick project to encrypt and decrypt a message using a Caesar cypher. About 1hr to complete.'''
 #Creating the alphabet cipher dictionaries
 import string
 ALPHABET = {'a':0}
