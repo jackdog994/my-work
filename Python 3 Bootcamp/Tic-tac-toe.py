@@ -1,10 +1,9 @@
 #docstring
 """
-This module allows you to play a game of naughts and crosses. Player 1 will be
-asked to select whether they want to be X or O. The positions on the board are
-mapped to the layout of the numpad, enter the number for the corresponding position.
-Upon someone winning, or a draw, you can choose whether to play again.
-This was the first extended program I wrote in Python. Have fun!
+First extended (+100 lines) piece of work done as part of the bootcamp course - a game of naughts and crosses.
+Player 1 will beasked to select whether they want to be X or O. The positions on the board are mapped to the
+layout of the numpad, enter the number for the corresponding position. Upon someone winning, or a draw, you can
+choose whether to play again. Have fun!
 """
 
 #Preparing game state
