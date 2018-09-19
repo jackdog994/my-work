@@ -1,5 +1,5 @@
 # Object Oriented Programming Challenge
-
+"""Bank account simulator - first piece of work done using classes, getting to grips with object orientated programming."""
 #For this challenge, create a bank account class that has two attributes:
 
 #* owner
@@ -31,7 +31,7 @@ class Account():
         else:
             print("That's not a valid input! Please try again")
             self.more()
-            
+
     def deposit(self):
 
         deposit_amount = int(input(f"Hello {self.owner}, your balance is {self.balance} - how much would you like to deposit?"))
