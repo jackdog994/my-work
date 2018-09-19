@@ -1,3 +1,6 @@
+"""First extended piece of work as part of the Python 3 bootcamp.
+A random integer between 1-100 is generated and using hotter and colder hints to help, the user guesses the number until they are correct."""
+
 #Creating the random integer
 import random
 randnum = random.randint(1,100)
