@@ -1,3 +1,8 @@
+"""Second milestone project of the course - create a game of blackjack. This was quite a long
+piece of work, taking me about a week to complete. I enjoyed translating the rules of blackjack in
+to the logical rules you can build in Python. There were a lot of steps to complete for this so to help
+me keep track I created and worked through the list below."""
+
 #Variable Players: Y
 #Player Names Retreived: Y
 #Initial Bets Taken: Y
