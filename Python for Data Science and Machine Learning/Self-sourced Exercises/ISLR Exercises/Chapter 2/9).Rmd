@@ -1,0 +1,42 @@
+```{r}
+Auto = read.table('Auto.data')
+
+Auto = read.table('Auto.data',header=T,na.strings = '?')
+
+dim(Auto)
+
+Auto=na.omit(Auto)
+dim(Auto)
+
+names(Auto)
+
+
+sapply(Auto[,1:7], range)
+
+sapply(Auto[,1:7], mean)
+
+sapply(Auto[,1:7], sd)
+
+
+Edited = Auto[-10:-85,]
+
+sapply(Edited[,1:7], range)
+
+
+sapply(Edited[,1:7], mean)
+
+   
+sapply(Edited[,1:7], sd)
+
+attach(Auto)
+par(mfrow=c(2,3))
+plot(cylinders,mpg)
+plot(displacement,mpg)
+plot(horsepower,mpg)
+plot(weight,mpg)
+plot(acceleration,mpg)
+plot(year,mpg)
+
+#From the plots it would appear that the cylinders, displacement, horsepower, weight and year variables all have an observable trend with MPG so would be worth using to predict MPG.
+
+```

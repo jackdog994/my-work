@@ -1,0 +1,93 @@
+```{r}
+
+install.packages('MASS')
+library(MASS)
+
+?Boston
+
+#The Boston data frame has 506 rows and 14 columns.
+
+attach(Boston)
+
+```
+
+```{r}
+par(mfrow=c(2,3))
+plot(rm,crim)
+plot(nox,crim)
+plot(black,crim)
+plot(ptratio,crim)
+plot(age,crim)
+plot(dis,crim)
+
+#Difficult to tell density of data points from these plots, however does seem to be some correlation between crime rate and pollution and age of the property.
+```
+```{r}
+par(mfrow=c(1,3))
+hist(crim[crim>1], breaks=30)
+hist(tax, breaks=30)
+hist(ptratio, breaks=30)
+
+#Most towns have a low crime rate, but there is a long tail indicating there are a small amount with high crime rates
+
+#Most towns occupy low-medium tax rate between 200-450, and there is one town with an extremely high tax rate (about 675) with a large number of residents in it
+
+#Spread of ratios for teacher, with the largest frequency by a long way being 20.5
+
+```
+
+```{r}
+dim(subset(Boston, chas == 1))
+#35 suburbs
+```
+```{r}
+median(ptratio)
+```
+```{r}
+t(subset(Boston, medv == min(medv)))
+```
+
+```{r}
+summary(Boston)
+
+#crim - above 3rd quartile, high values with one close to max
+#zn - value is at min for dataset
+#indus - on 3rd quartile
+#chas - neither bounded by the river
+#nox - above 3rd quartile
+#rm - below 1st quartile
+#age - at max
+#dis - below 1st quartile
+#rad - at max
+#tax - on 3rd quartile
+#ptratio - on 3rd quartile
+#black - above or near 3rd quartile
+#lstat- above 3rd quartile
+#medv - at min
+
+#Suburb appears to be an aged and low value zone, high crime rates.
+```
+
+
+```{r}
+dim(subset(Boston, rm > 7))
+
+#64 suburbs
+
+mean((subset(Boston, rm > 7))$medv)
+
+#Mean property price is above 3rd quartile, this subset is populated by rich homes 
+```
+
+
+```{r}
+dim(subset(Boston, rm > 8))
+
+#13 suburbs
+
+mean((subset(Boston, rm > 8))$medv)
+
+#Mean property price is above 3rd quartile, this subset is populated by very rich homes 
+```
+```
+
